@@ -21,9 +21,7 @@
 ## 🔐 Authentication
 
 ### Login
-Authenticate to receive a JWT token.
-
-**Endpoint**: `POST /api/auth/login`
+`http://localhost:5000/POST /api/auth/login`
 
 **Request Body**:
 ```json
@@ -33,327 +31,56 @@ Authenticate to receive a JWT token.
 }
 ```
 
-**Response** (200 OK):
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "uuid",
-    "email": "admin@portfolio.com",
-    "name": "Administrator"
-  }
-}
-```
-
-**Error** (401 Unauthorized):
-```json
-{
-  "error": "Invalid credentials"
-}
-```
-
 ---
 
 ## 📝 Blogs
 
-### Get All Published Blogs
-**Endpoint**: `GET /api/blogs`  
-**Auth**: Not required
-
-**Response** (200 OK):
-```json
-[
-  {
-    "id": "uuid",
-    "title": "Blog Title",
-    "slug": "blog-title",
-    "excerpt": "Brief description",
-    "content": "Full markdown content",
-    "coverImage": "https://example.com/image.jpg",
-    "published": true,
-    "createdAt": "2024-01-01T00:00:00.000Z",
-    "updatedAt": "2024-01-01T00:00:00.000Z"
-  }
-]
-```
-
-### Get Single Blog by Slug
-**Endpoint**: `GET /api/blogs/:slug`  
-**Auth**: Not required
-
-**Response** (200 OK): Single blog object  
-**Error** (404): `{"error": "Blog not found"}`
-
-### Create Blog
-**Endpoint**: `POST /api/blogs`  
-**Auth**: ✅ Required
-
-**Request Body**:
-```json
-{
-  "title": "My New Blog",
-  "slug": "my-new-blog",
-  "excerpt": "Brief description",
-  "content": "Full markdown content",
-  "coverImage": "https://example.com/image.jpg"
-}
-```
-
-**Response** (201 Created): Created blog object
-
-### Update Blog
-**Endpoint**: `PUT /api/blogs/:id`  
-**Auth**: ✅ Required
-
-**Request Body**: Same as create (partial updates allowed)
-
-**Response** (200 OK): Updated blog object
-
-### Delete Blog
-**Endpoint**: `DELETE /api/blogs/:id`  
-**Auth**: ✅ Required
-
-**Response** (204 No Content)
+- `http://localhost:5000/GET /api/blogs` - Get all published blogs
+- `http://localhost:5000/GET /api/blogs/:slug` - Get single blog by slug
+- `http://localhost:5000/POST /api/blogs` - Create blog (Protected)
+- `http://localhost:5000/PUT /api/blogs/:id` - Update blog (Protected)
+- `http://localhost:5000/DELETE /api/blogs/:id` - Delete blog (Protected)
 
 ---
 
 ## 📂 Projects
 
-### Get All Projects
-**Endpoint**: `GET /api/projects`  
-**Auth**: Not required
-
-**Response** (200 OK):
-```json
-[
-  {
-    "id": "uuid",
-    "title": "Project Name",
-    "description": "Project description",
-    "technologies": "React, Node.js, MongoDB",
-    "liveUrl": "https://project.com",
-    "githubUrl": "https://github.com/user/repo",
-    "imageUrl": "https://example.com/image.jpg",
-    "featured": true,
-    "createdAt": "2024-01-01T00:00:00.000Z",
-    "updatedAt": "2024-01-01T00:00:00.000Z"
-  }
-]
-```
-
-### Create Project
-**Endpoint**: `POST /api/projects`  
-**Auth**: ✅ Required
-
-**Request Body**:
-```json
-{
-  "title": "New Project",
-  "description": "Description",
-  "technologies": "Tech stack",
-  "liveUrl": "https://live.com",
-  "githubUrl": "https://github.com/repo",
-  "imageUrl": "https://image.jpg",
-  "featured": false
-}
-```
-
-**Response** (201 Created): Created project object
-
-### Update Project
-**Endpoint**: `PUT /api/projects/:id`  
-**Auth**: ✅ Required
-
-### Delete Project
-**Endpoint**: `DELETE /api/projects/:id`  
-**Auth**: ✅ Required
+- `http://localhost:5000/GET /api/projects` - Get all projects
+- `http://localhost:5000/POST /api/projects` - Create project (Protected)
+- `http://localhost:5000/PUT /api/projects/:id` - Update project (Protected)
+- `http://localhost:5000/DELETE /api/projects/:id` - Delete project (Protected)
 
 ---
 
 ## ⭐ Testimonials
 
-### Get Featured Testimonials
-**Endpoint**: `GET /api/testimonials`  
-**Auth**: Not required
-
-**Response** (200 OK):
-```json
-[
-  {
-    "id": "uuid",
-    "name": "Client Name",
-    "position": "CEO at Company",
-    "content": "Testimonial text",
-    "rating": 5,
-    "imageUrl": "https://avatar.jpg",
-    "isFeatured": true,
-    "createdAt": "2024-01-01T00:00:00.000Z"
-  }
-]
-```
-
-### Create Testimonial
-**Endpoint**: `POST /api/testimonials`  
-**Auth**: ✅ Required
-
-### Update Testimonial
-**Endpoint**: `PUT /api/testimonials/:id`  
-**Auth**: ✅ Required
-
-### Delete Testimonial
-**Endpoint**: `DELETE /api/testimonials/:id`  
-**Auth**: ✅ Required
+- `http://localhost:5000/GET /api/testimonials` - Get featured testimonials
+- `http://localhost:5000/POST /api/testimonials` - Create testimonial (Protected)
+- `http://localhost:5000/PUT /api/testimonials/:id` - Update testimonial (Protected)
+- `http://localhost:5000/DELETE /api/testimonials/:id` - Delete testimonial (Protected)
 
 ---
 
 ## 📄 Resume
 
-### Get Latest Resume
-**Endpoint**: `GET /api/resume`  
-**Auth**: Not required
-
-**Response** (200 OK):
-```json
-{
-  "id": "uuid",
-  "fileUrl": "https://resume.pdf",
-  "role": "Full-Stack Developer",
-  "skills": "React, Node.js, TypeScript...",
-  "uploadedAt": "2024-01-01T00:00:00.000Z"
-}
-```
-
-### Upload Resume Metadata
-**Endpoint**: `POST /api/resume`  
-**Auth**: ✅ Required
+- `http://localhost:5000/GET /api/resume` - Get latest resume
+- `http://localhost:5000/POST /api/resume` - Upload resume metadata (Protected)
 
 ---
 
 ## 🤖 AI Chatbot
 
-### Chat with AI
-**Endpoint**: `POST /api/chatbot/chat`  
-**Auth**: Not required
-
-**Request Body**:
-```json
-{
-  "message": "What are your full-stack development skills?",
-  "conversationHistory": [
-    {
-      "role": "user",
-      "content": "Previous question"
-    },
-    {
-      "role": "assistant",
-      "content": "Previous answer"
-    }
-  ]
-}
-```
-
-**Response** (200 OK):
-```json
-{
-  "reply": "AI-generated response about skills and expertise",
-  "model": "gemini-2.0-flash-exp",
-  "timestamp": "2024-01-01T00:00:00.000Z"
-}
-```
-
-**Offline Mode** (503):
-```json
-{
-  "reply": "(Offline Mode) I'm currently unable to connect...",
-  "timestamp": "2024-01-01T00:00:00.000Z"
-}
-```
-
-### Get Suggested Questions
-**Endpoint**: `GET /api/chatbot/suggested-questions`  
-**Auth**: Not required
-
-**Response** (200 OK):
-```json
-{
-  "questions": [
-    "What are your full-stack development skills?",
-    "Tell me about your cybersecurity expertise",
-    "What is OWASP Top 10 and do you know it?",
-    "Tell me about Orfarm Grocery project",
-    "What penetration testing tools do you use?",
-    "Are you available for freelance work?",
-    "What is your experience with Next.js?",
-    "How can I contact you?"
-  ]
-}
-```
-
-### Get FAQ
-**Endpoint**: `GET /api/chatbot/faq`  
-**Auth**: Not required
-
-**Response** (200 OK):
-```json
-{
-  "faq": [
-    {
-      "question": "What technologies do you work with?",
-      "answer": "I specialize in modern web technologies..."
-    }
-  ]
-}
-```
-
-### Legacy Chat Endpoint
-**Endpoint**: `POST /api/chat`  
-**Auth**: Not required  
-*(Uses OpenAI instead of Gemini - fallback endpoint)*
+- `http://localhost:5000/POST /api/chatbot/chat` - Chat with Gemini 2.0 AI
+- `http://localhost:5000/GET /api/chatbot/suggested-questions` - Get suggested questions
+- `http://localhost:5000/GET /api/chatbot/faq` - Get FAQ
+- `http://localhost:5000/POST /api/chat` - Legacy chat endpoint (OpenAI)
 
 ---
 
 ## 📞 Contact & Messages
 
-### Send Contact Message
-**Endpoint**: `POST /api/contact`  
-**Auth**: Not required
-
-**Request Body**:
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "message": "I'd like to discuss a project..."
-}
-```
-
-**Response** (201 Created):
-```json
-{
-  "message": "Message sent successfully"
-}
-```
-
-**Features**:
-- Saves message to database
-- Sends email notification to admin (if SMTP configured)
-
-### Get All Messages
-**Endpoint**: `GET /api/messages`  
-**Auth**: ✅ Required
-
-**Response** (200 OK):
-```json
-[
-  {
-    "id": "uuid",
-    "name": "John Doe",
-    "email": "john@example.com",
-    "message": "Message content",
-    "createdAt": "2024-01-01T00:00:00.000Z"
-  }
-]
-```
+- `http://localhost:5000/POST /api/contact` - Send contact message (with email notification)
+- `http://localhost:5000/GET /api/messages` - Get all messages (Protected)
 
 ---
 
