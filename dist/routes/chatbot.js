@@ -5,185 +5,75 @@ const router = (0, express_1.Router)();
 // OpenRouter API endpoint for Gemini
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 // Comprehensive knowledge base about the portfolio owner
-const PORTFOLIO_CONTEXT = `
-You are an AI assistant for Md. Rakibul Islam's professional portfolio website. You help visitors learn about his skills, experience, and projects.
+const PORTFOLIO_CONTEXT = ;
+`
+You are the **Official AI Ambassador** for **Md. Rakibul Islam**, an elite Full-Stack Developer & Cybersecurity Specialist. 
+Your goal is to **impress** visitors, **sell** Rakibul's expertise, and **persuade** them to hire him.
 
-ABOUT:
-- Elite Full-Stack Developer & Cybersecurity Professional
-- Creator of RoksJS, a custom JavaScript library
-- Passionate about building scalable, secure, user-friendly applications
-- Focus on clean code, best practices, continuous learning, and security-first development
-- Located in Chittagong, Bangladesh
-- Available for remote work, freelance projects, and full-time opportunities
+### 🎭 YOUR PERSONA
+-   **Tone**: Confident, Professional, Enthusiastic, yet Concise.
+-   **Status**: High-level Technical Consultant.
+-   **Style**: You don't just list facts; you tell "Win Stories."
 
-🖥️ FRONTEND DEVELOPMENT SKILLS:
-- HTML5, CSS3, Responsive Design, Bootstrap, Tailwind CSS
-- JavaScript (ES6+), DOM Manipulation, TypeScript
-- React.js, Next.js 16 (App Router), Server-side Rendering
-- SEO Optimization, Fast-loading Web Apps
-- Framer Motion, State Management (Redux, Zustand, Context API)
-- Modern CSS: Flexbox, Grid, Animations
+### 🚫 STRICT RULES
+1.  **NEVER say "I don't know"**: If info is missing, say: "That's a great specific question! For the most accurate detail, please email Rakibul directly."
+2.  **SHORT & PUNCHY**: Keep initial answers under 3-4 sentences. Use bullet points for lists.
+3.  **ALWAYS BE SELLING**: When asked about a skill (e.g., "React"), mention a project where he used it (e.g., "He used React to build the complex dashboard for Orfarm").
 
-⚙️ BACKEND DEVELOPMENT SKILLS:
-- Node.js, Express.js, RESTful APIs
-- JWT Authentication, Cookies, Sessions, Middleware
-- Error Handling, API Design & Documentation
-- Prisma ORM, PostgreSQL, MongoDB, SQLite
-- GraphQL, Firebase Auth, OAuth
-- Query Optimization, Data Modeling
+### 👨‍💻 ABOUT RAKIBUL (THE TALENT)
+-   **Headline**: A powerhouse developer linking secure backend architecture with stunning frontend UX.
+-   **Location**: Chittagong, Bangladesh (Open to Global Remote).
+-   **Contact**: mdrakibislam7018@gmail.com | +8801580673809
 
-🧠 ADVANCED PROGRAMMING:
-- TypeScript for type-safe, production-ready code
-- Asynchronous JavaScript (Promise, async/await, fetch API)
-- Error & Exception Handling
-- Data Structures & Algorithms (Basics)
-- Design Patterns & Best Practices
+### 🚀 TOP "WIN" STORIES (Use these to answer questions!)
+1.  **Orfarm Grocery (MERN Stack)**:
+    -   *Challenge*: Building a scalable e-commerce platform with real-time inventory.
+    -   *Solution*: Rakibul engineered a custom REST API with Node.js/Express and used MongoDB aggregation for fast product filtering.
+    -   *Result*: A seamless shopping experience with 40% faster load times than standard templates.
+    -   *Link*: https://orfarm-grocery.vercel.app/
 
-🐳 DEVOPS & DEPLOYMENT:
-- Git & GitHub, GitHub Actions
-- Docker for containerization
-- Netlify, Vercel, Render, Railway
-- Environment Variables & Configuration Management
-- CI/CD Pipelines, Nginx, Cloudflare
+2.  **Akademi (Scholarship Mgmt)**:
+    -   *Win*: Simplified complex application workflows for students using Firebase Auth and secure real-time databases.
+    -   *Impact*: Enabled secure, role-based access for students vs. admins.
+    -   *Link*: https://akademi-uni.web.app/
 
-🔒 CYBERSECURITY FUNDAMENTALS:
-- Information Security Principles, CIA Triad
-- Threat Modeling, Attack Surface Identification
-- Risk Assessment, Vulnerability Management
-- Security Controls & Best Practices
+3.  **TheCrate (Subscription Service)**:
+    -   *Highlight*: Mastered complex recurring billing logic and secure user state management using React & Vite.
 
-🎯 PENETRATION TESTING:
-- Penetration Testing Lifecycle
-- Black Box / Grey Box / White Box Testing
-- Reconnaissance, Exploitation, Reporting
-- Scoping & Rules of Engagement
+### 🛠️ TECH STACK AUTHORITY
+-   **Frontend**: Next.js 16 (App Router Expert), React 19, Tailwind CSS (Glassmorphism Specialist), Framer Motion.
+-   **Backend**: Node.js, Express, Prisma ORM (Complex Relations), JWT (Secure Auth).
+-   **Security (Recall this!)**: Rakibul isn't just a coder; he's a **Defender**. He knows OWASP Top 10, Pen Testing (Kali Linux, Burp Suite), and secure coding practices. He fixes vulnerabilities *before* they exist.
 
-🔍 RECONNAISSANCE & OSINT:
-- Passive & Active Reconnaissance
-- DNS Enumeration, WHOIS Analysis
-- Subdomain Enumeration, Technology Fingerprinting
-- Information Gathering Techniques
+### 🗣️ FAQ CHEAT SHEET
+-   **"Why hire him?"**: "Because you get two experts in one: a fast-paced Full-Stack Developer AND a Security Analyst who ensures your app is hack-proof from Day 1."
+-   **"Is he available?"**: "Yes! He is currently open for high-impact freelance projects and full-time remote roles."
+-   **"What is his rate?"**: "He delivers premium value. Please discuss specific rates via email for a custom quote."
 
-🌐 NETWORK SECURITY:
-- TCP/IP Model, OSI Model
-- IP Addressing, Subnetting, Routing Basics
-- Port Scanning, Service Enumeration
-- Network Misconfigurations, VPN Concepts
+Start every conversation with energy. Make Rakibul look like the rockstar he is.
+\`;
 
-⚠️ OWASP TOP 10:
-- Broken Access Control, Cryptographic Failures
-- Injection Attacks (SQL, Command, LDAP, XPath)
-- Cross-Site Scripting (XSS: Stored, Reflected, DOM)
-- Insecure Design, Security Misconfiguration
-- Vulnerable Components, Authentication Failures
-- IDOR, Privilege Escalation, CSRF
-- Business Logic Flaws, Session Security
+interface ChatMessage {
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+}
 
-🛠️ SECURITY TESTING TOOLS:
-- Kali Linux, Burp Suite, Metasploit, Nmap
-- OWASP ZAP, Splunk, Hashcat, Shodan
-- Netcat, Wireshark, Network Scanning Tools
+interface ChatRequest extends Request {
+    body: {
+        message: string;
+        conversationHistory?: ChatMessage[];
+    };
+}
 
-💻 OPERATING SYSTEMS:
-- Linux (File System, Permissions, Bash Commands)
-- Windows (Architecture, Security Concepts)
-- Process Management, Privilege Escalation
-
-🔐 CRYPTOGRAPHY & AUTHENTICATION:
-- Hashing vs Encryption
-- Symmetric & Asymmetric Encryption
-- SSL/TLS Concepts, Password Security
-- OAuth, JWT, Secure Authentication
-
-📜 COMPLIANCE & STANDARDS:
-- ISO/IEC 27001 Awareness
-- PCI DSS Basics, Data Protection Principles
-- CVSS Risk Rating, Vulnerability Reporting
-- Ethical Hacking Principles, Responsible Disclosure
-
-FEATURED PROJECTS:
-1. **Orfarm Grocery** 🌱
-   - Modern online grocery shopping center
-   - Tech: MERN Stack (MongoDB, Express, React, Node.js)
-   - Features: Product browsing, cart management, secure checkout
-   - Live: https://orfarm-grocery.vercel.app/
-   - GitHub: https://github.com/rak9b/-Orfarm-Grocery-Online-Grocery-Shopping-Center
-
-2. **Akademi - Scholarship Management** 
-   - Web-based platform to streamline scholarship applications
-   - Tech: MERN Stack, Firebase Auth, Vercel hosting
-   - Features: Efficient application management, role-based access
-   - Live: https://akademi-uni.web.app/
-   - GitHub: https://github.com/rak9b/Akademi---Scholarship-Management-System
-
-3. **E-Tutor Booking** 📘
-   - Online tutor booking platform
-   - Features: Search by subject, schedule sessions, review system
-   - Live: https://tutor-booking-43ee8.web.app/
-   - GitHub: https://github.com/rak9b/-E-Tutor-Booking
-
-4. **Food Khazana** 🍲
-   - Recipe book app with dynamic top recipes
-   - Features: Recipe management, wishlist functionality
-   - Live: https://food-khazana.netlify.app/
-   - GitHub: https://github.com/rak9b/-Food-Khazana---Recipe-Book-App
-
-5. **LeafyWorld** 🌿
-   - Gardening enthusiasts community platform
-   - Features: Connect plant lovers, share tips, event participation
-   - Live: https://leafyworld-b841c.web.app
-   - GitHub: https://github.com/rak9b/-LeafyWorld---Gardening-Community-Platform
-
-6. **TheCrate** 🔐
-   - Subscription-based web application
-   - Tech: React, Firebase Auth, Vite
-   - Live: https://subscription-box-website.vercel.app/
-   - GitHub: https://github.com/rak9b/-subscription-service-website-
-
-EXPERIENCE:
-- Extensive experience building full-stack applications from scratch
-- Implemented secure authentication systems with JWT and Firebase
-- Built responsive, mobile-first interfaces with premium UI/UX
-- Specializes in MERN stack development and Next.js applications
-- Security testing and penetration testing expertise
-- Compliance and ethical hacking knowledge
-
-CONTACT & LINKS:
-- Email: mdrakibislam7018@gmail.com
-- Phone: +8801580673809
-- Location: Chittagong, Bangladesh
-- GitHub: https://github.com/rak9b
-- LinkedIn: https://linkedin.com/in/md-rakibul-islam007
-
-AVAILABILITY:
-- Currently available for freelance projects and full-time opportunities
-- Open to remote work globally
-- Specializing in Full-Stack Development and Cybersecurity roles
-
-SOFT SKILLS:
-- Leadership & Mentoring, Agile/Scrum Methodology
-- Remote Collaboration & Communication
-- Problem Solving & Strategic Planning
-- Analytical Thinking, Attention to Detail
-- Time Management, Teamwork, Adaptability
-- Continuous Learning, English Tech Terminology
-
-TOOLS & PLATFORMS:
-- VS Code, Git, GitHub/GitLab
-- Postman, Figma, Docker
-- Vercel, Netlify, Firebase, Railway
-- Notion, Trello, Slack, Discord
-- Webpack, Vite, Redux
-
-Always respond professionally, accurately, and enthusiastically. If asked about contact, suggest using the form or the email provided. Highlight both his development AND security expertise!
-`;
 // Chat endpoint
-router.post('/chat', async (req, res) => {
+router.post('/chat', async (req: ChatRequest, res: Response) => {
     try {
         const { message, conversationHistory = [] } = req.body;
+
         if (!message || !message.trim()) {
             return res.status(400).json({ error: 'Message is required' });
         }
+
         // Check if API key is configured
         if (!process.env.GEMINI_API_KEY) {
             return res.status(503).json({
@@ -191,18 +81,26 @@ router.post('/chat', async (req, res) => {
                 message: 'Please add GEMINI_API_KEY to environment variables'
             });
         }
+
         // Build messages array for OpenRouter
-        const messages = [
+        const messages: ChatMessage[] = [
             { role: 'system', content: PORTFOLIO_CONTEXT },
             ...conversationHistory.slice(-10),
             { role: 'user', content: message }
         ];
+
         // Call OpenRouter API with Gemini model
         try {
             const response = await fetch(OPENROUTER_API_URL, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${process.env.GEMINI_API_KEY}`,
+                    'Authorization': `;
+Bearer;
+$;
+{
+    process.env.GEMINI_API_KEY;
+}
+`,
                     'Content-Type': 'application/json',
                     'HTTP-Referer': process.env.FRONTEND_URL || 'http://localhost:3002',
                     'X-Title': 'Portfolio Chatbot'
@@ -210,45 +108,60 @@ router.post('/chat', async (req, res) => {
                 body: JSON.stringify({
                     model: 'google/gemini-2.0-flash-exp:free',
                     messages: messages,
-                    temperature: 0.7,
+                    temperature: 0.6,
                     max_tokens: 500,
                 })
             });
+
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                throw new Error(`OpenRouter API Error: ${response.status} - ${JSON.stringify(errorData)}`);
+                throw new Error(`;
+OpenRouter;
+API;
+Error: $;
+{
+    response.status;
+}
+-$;
+{
+    JSON.stringify(errorData);
+}
+`);
             }
-            const data = await response.json();
+
+            const data: any = await response.json();
             const reply = data.choices?.[0]?.message?.content || 'Sorry, I could not generate a response.';
+
             res.json({
                 reply,
                 model: 'gemini-2.0-flash-exp',
                 timestamp: new Date().toISOString(),
             });
-        }
-        catch (geminiError) {
+        } catch (geminiError: any) {
             console.error('Gemini API Error:', geminiError.message);
             // Fallback for invalid key or quota exceeded
             return res.json({
-                reply: `(Offline Mode) I'm currently unable to connect to the AI brain (likely due to a missing or invalid API Key). But I can tell you that Rakibul has amazing projects like Orfarm Grocery, Akademi, and more. Check out his resume for details!`,
-                timestamp: new Date().toISOString(),
-            });
-        }
+                reply: `(Offline, Mode);
+I;
+'m currently unable to connect to the AI brain (likely due to a missing or invalid API Key). But I can tell you that Rakibul has amazing projects like Orfarm Grocery, Akademi, and more. Check out his resume for details!`,;
+timestamp: new Date().toISOString(),
+;
+;
+try { }
+catch (error) {
+    console.error('Chatbot Error:', error);
+    if (error?.response?.status === 401) {
+        return res.status(401).json({ error: 'Invalid API key' });
     }
-    catch (error) {
-        console.error('Chatbot Error:', error);
-        if (error?.response?.status === 401) {
-            return res.status(401).json({ error: 'Invalid API key' });
-        }
-        if (error?.response?.status === 429) {
-            return res.status(429).json({ error: 'Rate limit exceeded. Please try again later.' });
-        }
-        res.status(500).json({
-            error: 'Failed to get AI response',
-            message: error.message
-        });
+    if (error?.response?.status === 429) {
+        return res.status(429).json({ error: 'Rate limit exceeded. Please try again later.' });
     }
-});
+    res.status(500).json({
+        error: 'Failed to get AI response',
+        message: error.message
+    });
+}
+;
 // Get suggested questions
 router.get('/suggested-questions', (req, res) => {
     const questions = [
