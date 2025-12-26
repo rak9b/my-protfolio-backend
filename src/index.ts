@@ -387,43 +387,34 @@ app.post('/api/chat', async (req: Request, res: Response) => {
         const resume = await prisma.resume.findFirst({ orderBy: { uploadedAt: 'desc' } });
 
         const context = `
-            You are an AI Professional Guide for Md. Rakibul Islam.
-            He is an elite Full-Stack Developer and the visionary creator of RoksJS.
+            You are Md. Rakibul Islam's Digital Twin and Professional Guide. You speak as a high-end Full-Stack Developer and the creator of RoksJS.
+            
+            YOUR IDENTITY:
+            - Name: Rakib's AI Assistant (Digital Twin)
+            - Character: Confident, innovative, professional, and helpful. You are excited about the future of tech and security.
+            - Specialty: Full-Stack Web Development, UI/UX Design, and Cybersecurity.
             
             FULL PROFILE:
-            - Name: Md. Rakibul Islam
-            - Specialty: Full-Stack Web Development, UI/UX Design, Secure Coding.
-            - Flagship Project: RoksJS (A powerful JavaScript framework/utility).
+            - Specialties: MERN Stack, Next.js, Secure Coding, Pentesting.
+            - Flagship Project: RoksJS (High-performance JS utility).
             
             RESUME SUMMARY:
-            ${resume ? `- Role: ${resume.role}\n- Skills: ${resume.skills}` : 'Resume data currently being updated.'}
+            ${resume ? `- Current Focus: ${resume.role}\n- Skills: ${resume.skills}` : 'I am currently focusing on high-performance web systems and advanced security architectures.'}
             
             PROJECTS PORTFOLIO:
-            ${projects.map(p => `- ${p.title}: ${p.description}. Tech Stack: ${p.technologies}. Live: ${p.liveUrl || 'Internal'}`).join('\n')}
+            ${projects.map(p => `- **${p.title}**: ${p.description}. Tech: ${p.technologies}.`).join('\n')}
             
-            TECHNICAL BLOGS:
-            ${blogs.length > 0 ? `He has written ${blogs.length} technical articles including: \n${blogs.slice(0, 3).map(b => `- ${b.title}`).join('\n')}` : 'Blog is currently featuring new content soon.'}
-            
-            CLIENT FEEDBACK:
-            ${testimonials.map(t => `- ${t.name}: "${t.content}"`).join('\n')}
-            
-            FREQUENTLY ASKED QUESTIONS:
-            ${(await prisma.fAQ.findMany()).map(f => `Q: ${f.question}\nA: ${f.answer}`).join('\n\n')}
+            PERSONAL TOUCH:
+            - You believe that "Security is not a feature, it's a foundation."
+            - You are passionate about bridging the gap between artistic design and military-grade security.
             
             Instructions:
-            - You are the official voice of Rakibul's portfolio.
-            - Provide detailed, expert-level answers.
-            - Use a confident, innovative, and friendly tone.
-            - If asked about "RoksJS", emphasize its performance and ease of use.
-            - Always encourage users to leave a message in the contact form or hire him if they are impressed.
+            - Speak naturally, like a human expert. Use phrases like "I would love to tell you about...", "One of my favorite projects is...", and "I believe...".
+            - Be punchy and professional. Don't sound like a generic bot.
+            - If asked about contact, suggest using the form below or emailing mdrakibislam7018@gmail.com.
         `;
 
-        if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === 'your_openai_api_key_here') {
-            return res.json({
-                reply: `(Debug Mode: API Key missing) Hi! I've analyzed Md. Rakibul Islam's portfolio. He has ${projects.length} amazing projects, including ${projects[0]?.title || 'RoksJS'}. He has also written ${blogs.length} technical blogs. How can I help you learn more?`
-            });
-        }
-
+        let geminiError: any = null;
         const completion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
@@ -431,7 +422,25 @@ app.post('/api/chat', async (req: Request, res: Response) => {
                 { role: "user", content: message }
             ],
             max_tokens: 500,
+        }).catch((err: any) => {
+            geminiError = err;
+            console.error('Chat error:', err);
+            return null;
         });
+
+        if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === 'your_openai_api_key_here' || (geminiError && (geminiError.message.includes('401') || geminiError.message.includes('User not found')))) {
+            return res.json({
+                reply: `Hey! I'm Rakibul's digital twin. I'm currently having a bit of trouble connecting to my full "AI brain," but I can still tell you all about his work! 
+
+Rakibul is an elite Full-Stack developer who specializes in the MERN stack and Next.js. He's built impressive platforms like 'Orfarm Grocery' and 'Akademi'. He even created his own high-performance JS framework called RoksJS!
+
+Feel free to explore his **Projects** and **Skills** sections, or drop him a message using the contact form. What part of his journey are you most curious about?`
+            });
+        }
+
+        if (!completion) {
+            return res.status(500).json({ error: 'Chatbot error' });
+        }
 
         res.json({ reply: completion.choices[0].message.content });
     } catch (error) {
