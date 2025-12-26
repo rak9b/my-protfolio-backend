@@ -328,15 +328,15 @@ router.post('/chat', async (req: ChatRequest, res: Response) => {
 router.get('/suggested-questions', (req: Request, res: Response) => {
     const questions = [
         "What are your full-stack development skills?",
-        "Tell me about your cybersecurity expertise",
-        "What is OWASP Top 10 and do you know it?",
+        "Explain Indirect Syscalls for evasion",
+        "What is the BYOVD technique?",
+        "Tell me about Process Hollowing",
+        "What are LOLBins in security?",
+        "How do you secure Active Directory?",
+        "What is your cybersecurity expertise?",
         "Tell me about Orfarm Grocery project",
         "What penetration testing tools do you use?",
         "Are you available for freelance work?",
-        "What is your experience with Next.js?",
-        "Do you provide after-support for projects?",
-        "What is your development process?",
-        "How can I contact you?",
     ];
 
     res.json({ questions });
