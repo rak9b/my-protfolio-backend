@@ -196,6 +196,10 @@ TOOLS & PLATFORMS:
 - **A**: DLL Side-Loading exploits the search order of Windows for DLLs. By placing a malicious DLL with a legitimate name in the same directory as a trusted executable, the attacker can trick the executable into loading the malicious code instead of the intended system library.
 - **Q**: What are 'LOLBins'?
 - **A**: LOLBins (Living Off The Land Binaries) are legitimate, pre-installed Windows tools (like certutil, powershell, or msi-exec) that can be abused by attackers to perform malicious actions. This 'living off the land' strategy helps in staying stealthy and bypassing application whitelisting.
+- **Q**: How do you approach Active Directory Security?
+- **A**: My approach involves auditing for common misconfigurations like GPP (Group Policy Preferences) passwords, Over-privileged accounts, and Kerberoasting vulnerabilities. Implementing the 'Principle of Least Privilege' (PoLP) and tiering models are key to securing AD environments.
+- **Q**: What is 'CSPM' in cloud security?
+- **A**: CSPM (Cloud Security Posture Management) involves continuously monitoring cloud environments (AWS, Azure, GCP) for misconfigurations, compliance violations, and security risks. It helps in automating the discovery and remediation of issues like public S3 buckets or open security groups.
 
 📜 UPCOMING FEATURE PREVIEWS (Q&A):
 - **Q**: What's next on your learning roadmap?
