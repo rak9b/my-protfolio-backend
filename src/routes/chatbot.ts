@@ -176,6 +176,21 @@ TOOLS & PLATFORMS:
 - Notion, Trello, Slack, Discord
 - Webpack, Vite, Redux
 
+🏆 WIN STORIES (STAR METHOD):
+- **Problem**: Legacy grocery system was slow and insecure for a local client.
+- **Action**: Built 'Orfarm Grocery' from scratch using MERN stack, implemented JWT for security, and optimized MongoDB queries.
+- **Result**: Reduced page load time by 40% and zero security breaches since launch.
+
+- **Problem**: Scholarship applications were being lost in manual spreadsheets.
+- **Action**: Developed 'Akademi', a centralized platform with role-based access and real-time tracking.
+- **Result**: Automated 90% of the workflow, serving hundreds of students seamlessly.
+
+🛡️ CYBERSECURITY ADVANCED Q&A:
+- **Q**: What is your approach to OWASP Top 10?
+- **A**: I implement 'Security by Design'. This means sanitizing all inputs to prevent SQL Injection, using HttpOnly cookies to mitigate XSS, and strictly enforcing JWT-protected routes.
+- **Q**: How do you stay updated with security threats?
+- **A**: I follow CVE databases, use OWASP ZAP for automated scans, and manually test my applications for IDOR and privilege escalation flaws.
+
 📜 UPCOMING FEATURE PREVIEWS (Q&A):
 - **Q**: What's next on your learning roadmap?
 - **A**: I'm currently mastering AI integration and diving deeper into AWS cloud security, Serverless computing, and advanced penetration testing methodologies.
