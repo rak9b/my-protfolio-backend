@@ -143,10 +143,10 @@ FEATURED PROJECTS:
 
 EXPERIENCE:
 - Extensive experience building full-stack applications from scratch
-- Implemented secure authentication systems with JWT and Firebase
-- Built responsive, mobile-first interfaces with premium UI/UX
-- Specializes in MERN stack development and Next.js applications
-- Security testing and penetration testing expertise
+- Network Security: Firewalls, VPNs, IDS/IPS, Wireshark, Nmap
+- Windows Internals: Syscalls (Direct/Indirect), EDR Evasion, Kernel-mode vs User-mode
+- Techniques: BYOVD (Bring Your Own Vulnerable Driver), Process Injection, API Hooking
+- Malware Analysis: Static/Dynamic analysis, Debugging
 - Compliance and ethical hacking knowledge
 
 CONTACT & LINKS:
@@ -212,6 +212,10 @@ TOOLS & PLATFORMS:
 - **A**: I'm currently exploring React Native to leverage my React knowledge and build cross-platform mobile apps that complement my web projects.
 - **Q**: What professional certifications are you targeting next?
 - **A**: I'm preparing for the AWS Certified Security Specialty and the OSCP (Offensive Security Certified Professional) to formalize my cloud and penetration testing expertise.
+- **Q**: Can you explain 'Indirect Syscalls' in the context of malware evasion?
+- **A**: Indirect Syscalls are used to bypass EDR/AV hooks in user-mode APIs (like Kernel32.dll). Instead of calling the API directly, the malware executes the syscall instruction directly in ntdll.dll, making it appear as a legitimate system call and avoiding detection by hooks.
+- **Q**: What is the 'BYOVD' technique?
+- **A**: BYOVD (Bring Your Own Vulnerable Driver) involves an attacker installing a legitimate but vulnerable signed driver on a system. They then exploit the driver's vulnerability to execute code with kernel-level privileges (Ring 0), allowing them to disable security controls or modify kernel structures.
 
 Always respond professionally, accurately, and enthusiastically. If asked about contact, suggest using the form or the email provided. Highlight both his development AND security expertise!
 `;
