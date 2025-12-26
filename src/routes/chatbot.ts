@@ -190,6 +190,12 @@ TOOLS & PLATFORMS:
 - **A**: I implement 'Security by Design'. This means sanitizing all inputs to prevent SQL Injection, using HttpOnly cookies to mitigate XSS, and strictly enforcing JWT-protected routes.
 - **Q**: How do you stay updated with security threats?
 - **A**: I follow CVE databases, use OWASP ZAP for automated scans, and manually test my applications for IDOR and privilege escalation flaws.
+- **Q**: What is 'Process Hollowing'?
+- **A**: Process Hollowing is a technique where a legitimate process (like svchost.exe) is started in a suspended state. Its memory is then 'hollowed out' and replaced with malicious code. When the process resumes, it executes the malicious code under the guise of the legitimate process, making it harder for simple process monitors to detect.
+- **Q**: What is 'DLL Side-Loading'?
+- **A**: DLL Side-Loading exploits the search order of Windows for DLLs. By placing a malicious DLL with a legitimate name in the same directory as a trusted executable, the attacker can trick the executable into loading the malicious code instead of the intended system library.
+- **Q**: What are 'LOLBins'?
+- **A**: LOLBins (Living Off The Land Binaries) are legitimate, pre-installed Windows tools (like certutil, powershell, or msi-exec) that can be abused by attackers to perform malicious actions. This 'living off the land' strategy helps in staying stealthy and bypassing application whitelisting.
 
 📜 UPCOMING FEATURE PREVIEWS (Q&A):
 - **Q**: What's next on your learning roadmap?
